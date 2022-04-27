@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lamp-ecommerce
+  labels:
+    app: lamp-ecommerce
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lamp-ecommerce
+  template:
+    metadata:
+      labels:
+        app: lamp-ecommerce
+    spec:
+      containers:
+      - name: lamp-stack
+        image: ahmedmohamed1101140/lamp-ecommerce:latest
+        ports:
+          - containerPort: 80
+        env:
+        - name: MYSQL_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mysql-cred
+              key: MYSQL_ROOT_USERNAME
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-cred
+              key: MYSQL_ROOT_PASSWORD
+        - name: MYSQL_ROOT_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-host
+              key: MYSQL_ROOT_HOST
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"

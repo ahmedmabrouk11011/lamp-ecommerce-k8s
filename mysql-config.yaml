@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-host
+  labels:
+    app: lamp-ecommerce
+data:
+  MYSQL_ROOT_HOST: database-1.c5hdvwinjrid.us-west-1.rds.amazonaws.com:3306
