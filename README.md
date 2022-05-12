@@ -4,16 +4,24 @@ A- you need to create account access key and secret
 
 Setps:
 1- Sign in to your account
+
 2- Navigate to the IAM service
+
 3- Go for users
+
 4- Select your username
+
 5- Select Security Credintials
+
 6- Create Access Key
 
 
 B- Install AWS CLI and configure it
+
 1- Download the AWS CLI
+
 2- make sure the installation success by excuting
+
 ```
 aws --version
 ```
