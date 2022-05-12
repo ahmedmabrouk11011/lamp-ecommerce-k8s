@@ -5,4 +5,4 @@ metadata:
   labels:
     app: lamp-ecommerce
 data:
-  MYSQL_ROOT_HOST: database-1.c5hdvwinjrid.us-west-1.rds.amazonaws.com:3306
+  MYSQL_ROOT_HOST: ecommerce-db.ccs4c6yqklgv.us-east-1.rds.amazonaws.com:3306

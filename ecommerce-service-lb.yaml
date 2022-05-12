@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  lamp-ecommerce-service-lb
+  labels:
+    app: lamp-ecommerce
+spec:
+  selector:
+    app:  lamp-ecommerce
+  type:  LoadBalancer
+  ports:
+  - name:  http-port
+    port:  80
