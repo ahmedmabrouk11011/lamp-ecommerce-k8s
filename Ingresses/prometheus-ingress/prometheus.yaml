@@ -1,0 +1,22 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prometheus
+  namespace: monitoring
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers 'Foo: bar';
+spec:
+  ingressClassName: external-nginx
+  rules:
+  - host: a9fc9a357b76f43a0a8d05859fb59558-db7477e1641aef76.elb.us-east-1.amazonaws.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: prometheus-operated
+            port:
+              number: 9090

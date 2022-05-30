@@ -62,6 +62,86 @@ then deploy the application
 ./deploy-all.sh
 ```
 
+Deploy Promethueus
+
+
+```
+kubectl apply -f prometheus/0-crd
+
+kubectl apply -f prometheus/1-prometheus-operator
+
+kubectl apply -f prometheus/2-prometheus
+
+
+```
+
+
+Deploy Nignx using HELM 
+
+
+```
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+
+helm repo update
+
+helm search repo nginx
+
+helm install my-ing ingress-nginx/ingress-nginx --namespace ingress --version 3.35.0 --values my-ing/ingress-nginx/values.yaml --create-namespace
+
+helm list -n ingress
+
+```
+
+Check Prometheus
+
+
+```
+kubectl port-forward svc/prometheus-operated 9090 -n monitoring
+```
+
+if you need to monitor nginx-ingress with promethues do the below
+
+```
+kubectl edit namespace ingress
+```
+
+Add the below label
+
+``` 
+monitoring: prometheus
+```
+
+
+
+Deploy Grafana
+
+``` 
+kubectl apply -f grafana
+kubectl port-forward svc/grafana 3000 -n monitoring
+```
+After you login using admin/devops123 you should add new datasource 
+http://prometheus-operated:9090
+
+Now time to create new dashboard
+Manage -> Import -> paste the ID '9614'
+
+
+Now we will create Ingresses
+
+1- make sure to paste your ingress DNS record to the host in the ingresses YAML
+
+```
+kubectl get svc -n ingress 
+```
+
+2- create the ingress for prometheus OR grafana OR Application
+```
+kubectl apply -f Ingresses/prometheus-ingress/
+kubectl apply -f Ingresses/grafana-ingress/
+kubectl apply -f Ingresses/application-ingress/
+```
+NOTE: you can't run Both in gress at the same time unless you used Custom DNS
+
 
 
 

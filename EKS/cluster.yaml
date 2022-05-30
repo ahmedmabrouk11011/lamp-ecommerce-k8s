@@ -6,7 +6,8 @@ metadata:
   version: "1.20"
 managedNodeGroups:
 - name: primary
-  instanceType: t2.micro
-  minSize: 3
-  maxSize: 6
-  # spot: true
+  instanceType: t3.small
+  desiredCapacity: 3
+  minSize: 2
+  maxSize: 4
+  spot: true
